@@ -1,5 +1,5 @@
 #Creates instance with a single PD disk
-# https://www.terraform.io/docs/providers/google/d/datasource_compute_instance.html
+# https://www.terraform.io/docs/providers/google/r/compute_instance.html
 resource "google_compute_instance" "default" {
 name         = "test-vm"
 machine_type = "${var.machine_type}"
