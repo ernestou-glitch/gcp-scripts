@@ -63,7 +63,8 @@ resource "google_bigquery_table" "sheet" {
     }
 
     source_uris = [
-      "https://docs.google.com/spreadsheets/d/1o54D6v4c1ctrgaIEAb7RuohLsmEnyJ67tjnPUG4qUxg",
+      "https://docs.google.com/spreadsheets/d/DOCUMENT-ID",
+      #look at the URL of your sheets file and copy the ID after d/ in the URL
     ]
   }
 }
