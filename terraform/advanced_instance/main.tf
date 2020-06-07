@@ -42,3 +42,18 @@ service_account {
 }
 
 }
+
+# https://www.terraform.io/docs/providers/google/r/compute_disk.html
+resource "google_compute_disk" "additional" {
+  name  = "test-disk"
+  type  = "pd-ssd"
+  zone  = var.zone
+  size = "10"
+}
+
+# https://www.terraform.io/docs/providers/google/r/compute_attached_disk.html
+#attribiuter self_link indicates Terraform to look for resources created in this file
+resource "google_compute_attached_disk" "default" {
+    disk = "${google_compute_disk.additional.self_link}"
+    instance = google_compute_instance.default[0].self_link #because instance resource has a "count" attribute we have to indicate is the first one : 0,1,2,3,...
+}
