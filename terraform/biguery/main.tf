@@ -70,13 +70,37 @@ resource "google_bigquery_table" "sheet" {
   }
 }
 
-
+# Creation of BigQuery View
 resource "google_bigquery_table" "view" {
   dataset_id = google_bigquery_dataset.bq-dataset.dataset_id
   table_id   = "view_table"
 
   view {
     query = "Select field1, field2 from project.dataset.table"
-    use_legacy_sql = false #The best practice is to avoid using Legacy SQL
+    use_legacy_sql = false #The best practice is avoid using Legacy SQL
   }
+}
+
+# Job Execution
+resource "google_bigquery_job" "job" {
+  job_id = "job_id_xxxxx"
+
+  # Optional
+  # labels = {
+  #   "example-label" ="example-value"
+  # }
+
+  query {
+    query = "Select * from project.dataset.table"
+
+    # Optional
+    # destination_table {
+    #   project_id = google_bigquery_table.foo.project
+    #   dataset_id = google_bigquery_table.foo.dataset_id
+    #   table_id   = google_bigquery_table.foo.table_id
+    # }
+    use_legacy_sql = false #The best practice is avoid using Legacy SQL
+    
+  }
+
 }
