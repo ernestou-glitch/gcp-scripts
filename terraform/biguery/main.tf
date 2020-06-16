@@ -18,9 +18,10 @@ resource "google_bigquery_table" "bq-table" {
   dataset_id = google_bigquery_dataset.bq-dataset.dataset_id
   table_id   = "hr_table"
 
-  time_partitioning {
-    type = "DAY"
-  }
+  #Option to create a partitioned table
+  # time_partitioning {
+  #   type = "DAY"
+  # }
 
   labels = {
     env = "default"
@@ -66,5 +67,16 @@ resource "google_bigquery_table" "sheet" {
       "https://docs.google.com/spreadsheets/d/DOCUMENT-ID",
       #look at the URL of your sheets file and copy the ID after d/ in the URL
     ]
+  }
+}
+
+
+resource "google_bigquery_table" "view" {
+  dataset_id = google_bigquery_dataset.bq-dataset.dataset_id
+  table_id   = "view_table"
+
+  view {
+    query = "Select field1, field2 from project.dataset.table"
+    use_legacy_sql = false #The best practice is to avoid using Legacy SQL
   }
 }
