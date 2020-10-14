@@ -1,9 +1,3 @@
-#Variables for provider.tf file
-variable "path" {default = "/home/................"}
-variable "project_id" {default = "xxxxxxxxxxxxx"}
-variable "gcp_region" {default = "us-central1"}
-
-#ADD list of desired permissions for bigquery custom role
 variable "permissions" { default = ["bigquery.connections.get",
 "bigquery.connections.getIamPolicy",
 "bigquery.connections.list",
